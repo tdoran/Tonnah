@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel index.html",
+    "start": "parcel public/index.html",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
-    "build": "parcel build index.html"
+    "build": "parcel build public/index.html"
   },
   "keywords": [],
   "author": "",
