@@ -1,5 +1,6 @@
 import React from "React";
 import Timer from "./timer/timer.js";
+import Singlephoto from "./singlephoto/singlephoto.js";
 
 export default class Board extends React.Component {
   state = {
@@ -7,7 +8,8 @@ export default class Board extends React.Component {
     time: 5,
     singlePhoto: "",
     photoGroup: "",
-    renderSinglePhoto: false
+    renderSinglePhoto: false,
+    url: ""
   };
 
   timer = () => {
@@ -44,6 +46,10 @@ export default class Board extends React.Component {
         <button onClick={this.beginGame}>GO!</button>
         {renderSinglePhoto && (
           <Timer time={time} timer={this.timer} rendered={renderSinglePhoto} />
+        )}
+
+        {renderSinglePhoto && (
+          <Singlephoto url="https://www.washingtonpost.com/rf/image_1484w/2010-2019/WashingtonPost/2013/01/17/Production/Sunday/SunBiz/Images/268727_254043381379945_546402058_n.tif?t=20170517" />
         )}
       </div>
     );
