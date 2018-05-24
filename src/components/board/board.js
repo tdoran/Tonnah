@@ -1,6 +1,7 @@
 import React from "React";
 import Timer from "./timer/timer.js";
 import Singlephoto from "./singlephoto/singlephoto.js";
+import Photogroup from "./photogroup/photogroup.js";
 import { pickSingle } from "../../utils/datahelpers.js";
 
 let photoGroupApi = [
@@ -25,9 +26,18 @@ export default class Board extends React.Component {
   timer = () => {
     const countDown = setInterval(() => {
       if (this.state.time === 0) {
-        this.setState({ renderSinglePhoto: false, time: 6 });
-        clearInterval(countDown);
+        if (this.state.renderSinglePhoto) {
+          this.setState({
+            renderSinglePhoto: false,
+            renderPhotoGroup: true,
+            time: 6
+          });
+        } else {
+          this.setState({ renderPhotoGroup: false, time: 6 });
+          clearInterval(countDown);
+        }
       }
+
       this.setState(prevState => {
         return { time: prevState.time - 1 };
       });
@@ -50,17 +60,19 @@ export default class Board extends React.Component {
       time,
       singlePhoto,
       photoGroup,
-      renderSinglePhoto
+      renderSinglePhoto,
+      renderPhotoGroup
     } = this.state;
 
     return (
       <div className="board">
         <button onClick={this.beginGame}>GO!</button>
-        {renderSinglePhoto && (
+        {(renderSinglePhoto || renderPhotoGroup) && (
           <Timer time={time} timer={this.timer} rendered={renderSinglePhoto} />
         )}
 
         {renderSinglePhoto && <Singlephoto url={singlePhoto} />}
+        {renderPhotoGroup && <Photogroup urls={photoGroup} />}
       </div>
     );
   }
