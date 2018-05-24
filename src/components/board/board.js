@@ -2,6 +2,7 @@ import React from "React";
 import Timer from "./timer/timer.js";
 import Singlephoto from "./singlephoto/singlephoto.js";
 import Photogroup from "./photogroup/photogroup.js";
+import Gameover from "./gameover/gameover.js";
 import { pickSingle } from "../../utils/datahelpers.js";
 
 let photoGroupApi = [
@@ -20,7 +21,8 @@ export default class Board extends React.Component {
     renderSinglePhoto: false,
     renderPhotoGroup: false,
     url: "",
-    groupUrls: []
+    clickedPhoto: "abc",
+    renderGameOver: false
   };
 
   timer = () => {
@@ -54,6 +56,29 @@ export default class Board extends React.Component {
     });
   };
 
+  clickHandler = url => {
+    return () => {
+      if (url === this.state.singlePhoto) {
+        this.setState(prevState => {
+          return {
+            score: prevState.score + 1,
+            renderPhotoGroup: false,
+            time: 5
+          };
+        });
+        this.beginGame();
+      } else {
+        this.setState(prevState => {
+          return {
+            renderPhotoGroup: false,
+            time: 0,
+            renderGameOver: true
+          };
+        });
+      }
+    };
+  };
+
   render() {
     const {
       score,
@@ -61,18 +86,28 @@ export default class Board extends React.Component {
       singlePhoto,
       photoGroup,
       renderSinglePhoto,
-      renderPhotoGroup
+      renderPhotoGroup,
+      renderGameOver
     } = this.state;
 
     return (
       <div className="board">
-        <button onClick={this.beginGame}>GO!</button>
+        {!renderGameOver && <h1>score: {score}</h1>}
+        {renderGameOver && <Gameover score={score} />}
+
+        <button onClick={this.beginGame}>
+          {!renderGameOver ? "Go!" : "Play Again"}
+        </button>
+
         {(renderSinglePhoto || renderPhotoGroup) && (
           <Timer time={time} timer={this.timer} rendered={renderSinglePhoto} />
         )}
 
         {renderSinglePhoto && <Singlephoto url={singlePhoto} />}
-        {renderPhotoGroup && <Photogroup urls={photoGroup} />}
+
+        {renderPhotoGroup && (
+          <Photogroup urls={photoGroup} clickHandler={this.clickHandler} />
+        )}
       </div>
     );
   }
