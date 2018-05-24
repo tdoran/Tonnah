@@ -3,21 +3,14 @@ import Timer from "./timer/timer.js";
 import Singlephoto from "./singlephoto/singlephoto.js";
 import Photogroup from "./photogroup/photogroup.js";
 import Gameover from "./gameover/gameover.js";
-import { pickSingle } from "../../utils/datahelpers.js";
-
-let photoGroupApi = [
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Hot_dog_with_mustard.png/1200px-Hot_dog_with_mustard.png",
-  "https://content.freddysusa.com/wp-content/uploads/2016/03/veggie-burger.png",
-  "http://kannii.com/wp-content/uploads/2017/07/chips.png",
-  "https://www.washingtonpost.com/rf/image_1484w/2010-2019/WashingtonPost/2013/01/17/Production/Sunday/SunBiz/Images/268727_254043381379945_546402058_n.tif?t=20170517"
-];
+import { getData, pickSingle, makeImageArray, shuffle } from "../../utils/datahelpers.js";
 
 export default class Board extends React.Component {
   state = {
     score: 0,
     time: 5,
     singlePhoto: "",
-    photoGroup: photoGroupApi,
+    photoGroup: '',
     renderSinglePhoto: false,
     renderPhotoGroup: false,
     url: "",
@@ -46,12 +39,21 @@ export default class Board extends React.Component {
     }, 1000);
   };
 
+  componentDidMount() {
+    getData()
+      .then(data => {
+        let gifArray = makeImageArray(data);
+        this.setState({ photoGroup: gifArray })
+      })
+  }
+
   beginGame = () => {
     this.setState(() => {
       let pickedPhoto = pickSingle(this.state.photoGroup);
       return {
         renderSinglePhoto: true,
-        singlePhoto: pickedPhoto
+        singlePhoto: pickedPhoto,
+        photoGroup: shuffle(this.state.photoGroup)
       };
     });
   };
@@ -63,7 +65,7 @@ export default class Board extends React.Component {
           return {
             score: prevState.score + 1,
             renderPhotoGroup: false,
-            time: 5
+            time: 5,
           };
         });
         this.beginGame();
