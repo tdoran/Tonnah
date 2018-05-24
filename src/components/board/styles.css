@@ -1,0 +1,39 @@
+.board {
+  text-align: center;
+  width: 90%;
+  background-color: #fbfaf9;
+  padding-bottom: 5%;
+  overflow: auto;
+  position: relative;
+  border-radius: 0.25rem;
+  box-shadow: 0 4px 8px 0 rgba(2, 2, 2, 0.21), 0 6px 20px 0 rgba(2, 2, 2, 0.24);
+}
+
+.board--title {
+  color: rgb(255, 1, 200);
+}
+
+.board--instruction {
+  color: rgb(15, 18, 19);
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.board--instruction--keyword {
+  color: rgb(255, 1, 200);
+  font-style: italic;
+}
+
+.board--btn {
+  height: 2rem;
+  width: 3rem;
+  border-radius: 0.25rem;
+}
+
+.board--btn:focus {
+  outline-color: #00ccff;
+}
+
+.board--score {
+  color: rgb(15, 18, 19);
+}
