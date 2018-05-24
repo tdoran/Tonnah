@@ -8,7 +8,7 @@ export default class Photogroup extends React.Component {
       <div>
         {urls.map(url => (
           <img
-            className="board--singlephoto"
+            className="board--photos"
             key={urls.indexOf(url)}
             src={url}
             onClick={this.props.clickHandler(url)}
