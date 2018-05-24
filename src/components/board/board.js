@@ -3,14 +3,19 @@ import Timer from "./timer/timer.js";
 import Singlephoto from "./singlephoto/singlephoto.js";
 import Photogroup from "./photogroup/photogroup.js";
 import Gameover from "./gameover/gameover.js";
-import { getData, pickSingle, makeImageArray, shuffle } from "../../utils/datahelpers.js";
+import {
+  getData,
+  pickSingle,
+  makeImageArray,
+  shuffle
+} from "../../utils/datahelpers.js";
 
 export default class Board extends React.Component {
   state = {
     score: 0,
     time: 5,
     singlePhoto: "",
-    photoGroup: '',
+    photoGroup: "",
     renderSinglePhoto: false,
     renderPhotoGroup: false,
     url: "",
@@ -43,8 +48,9 @@ export default class Board extends React.Component {
     getData()
       .then(data => {
         let gifArray = makeImageArray(data);
-        this.setState({ photoGroup: gifArray })
+        this.setState({ photoGroup: gifArray });
       })
+      .catch(err => console.log(err.message));
   }
 
   beginGame = () => {
@@ -65,7 +71,7 @@ export default class Board extends React.Component {
           return {
             score: prevState.score + 1,
             renderPhotoGroup: false,
-            time: 5,
+            time: 5
           };
         });
         this.beginGame();
