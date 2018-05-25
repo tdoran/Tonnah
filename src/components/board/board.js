@@ -14,7 +14,7 @@ import {
 export default class Board extends React.Component {
   state = {
     score: 0,
-    time: 10,
+    time: 5,
     singlePhoto: "",
     photoGroup: "",
     renderSinglePhoto: false,
