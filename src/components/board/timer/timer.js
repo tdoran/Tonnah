@@ -8,10 +8,6 @@ export default class Timer extends React.Component {
   }
 
   render() {
-    return (
-      <React.Fragment>
-        <p className="board--timer"> {this.props.time} </p>
-      </React.Fragment>
-    );
+    return <p className="board--timer"> {this.props.time} </p>;
   }
 }
