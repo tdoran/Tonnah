@@ -26,12 +26,17 @@
 
 .board--btn {
   height: 2rem;
-  width: 3rem;
+  width: 4rem;
   border-radius: 0.25rem;
+  background-color: rgb(143, 241, 30);
+  border: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  box-shadow: 0 8px 16px 0 rgba(6, 6, 6, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
 }
 
 .board--btn:focus {
-  outline-color: #00ccff;
+  outline-color: rgb(0, 203, 255);
 }
 
 .board--score {
