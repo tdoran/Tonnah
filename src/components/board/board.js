@@ -3,14 +3,20 @@ import Timer from "./timer/timer.js";
 import Singlephoto from "./singlephoto/singlephoto.js";
 import Photogroup from "./photogroup/photogroup.js";
 import Gameover from "./gameover/gameover.js";
-import { getData, pickSingle, makeImageArray, shuffle } from "../../utils/datahelpers.js";
+import "./styles.css";
+import {
+  getData,
+  pickSingle,
+  makeImageArray,
+  shuffle
+} from "../../utils/datahelpers.js";
 
 export default class Board extends React.Component {
   state = {
     score: 0,
     time: 5,
     singlePhoto: "",
-    photoGroup: '',
+    photoGroup: "",
     renderSinglePhoto: false,
     renderPhotoGroup: false,
     url: "",
@@ -28,7 +34,11 @@ export default class Board extends React.Component {
             time: 6
           });
         } else {
-          this.setState({ renderPhotoGroup: false, time: 6 });
+          this.setState({
+            renderPhotoGroup: false,
+            time: 6,
+            renderGameOver: true
+          });
           clearInterval(countDown);
         }
       }
@@ -40,11 +50,10 @@ export default class Board extends React.Component {
   };
 
   componentDidMount() {
-    getData()
-      .then(data => {
-        let gifArray = makeImageArray(data);
-        this.setState({ photoGroup: gifArray })
-      })
+    getData().then(data => {
+      let gifArray = makeImageArray(data);
+      this.setState({ photoGroup: gifArray });
+    });
   }
 
   beginGame = () => {
@@ -53,7 +62,8 @@ export default class Board extends React.Component {
       return {
         renderSinglePhoto: true,
         singlePhoto: pickedPhoto,
-        photoGroup: shuffle(this.state.photoGroup)
+        photoGroup: shuffle(this.state.photoGroup),
+        renderGameOver: false
       };
     });
   };
@@ -65,7 +75,7 @@ export default class Board extends React.Component {
           return {
             score: prevState.score + 1,
             renderPhotoGroup: false,
-            time: 5,
+            time: 5
           };
         });
         this.beginGame();
@@ -94,12 +104,20 @@ export default class Board extends React.Component {
 
     return (
       <div className="board">
-        {!renderGameOver && <h1>score: {score}</h1>}
+        <h1 className="board--title">Gif, Set, Match</h1>
+        <h2 className="board--instruction">
+          <span className="board--instruction--keyword">See</span> a gif.{" "}
+          <span className="board--instruction--keyword">Find</span> a gif.
+        </h2>
+        {!renderGameOver && <p className="board--score">score: {score}</p>}
         {renderGameOver && <Gameover score={score} />}
 
-        <button onClick={this.beginGame}>
-          {!renderGameOver ? "Go!" : "Play Again"}
-        </button>
+        {!renderSinglePhoto &&
+          !renderPhotoGroup && (
+            <button className="board--btn" onClick={this.beginGame}>
+              {!renderGameOver ? "Go!" : "Play Again"}
+            </button>
+          )}
 
         {(renderSinglePhoto || renderPhotoGroup) && (
           <Timer time={time} timer={this.timer} rendered={renderSinglePhoto} />
