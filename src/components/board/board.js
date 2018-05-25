@@ -34,7 +34,11 @@ export default class Board extends React.Component {
             time: 6
           });
         } else {
-          this.setState({ renderPhotoGroup: false, time: 6 });
+          this.setState({
+            renderPhotoGroup: false,
+            time: 6,
+            renderGameOver: true
+          });
           clearInterval(countDown);
         }
       }
@@ -58,7 +62,8 @@ export default class Board extends React.Component {
       return {
         renderSinglePhoto: true,
         singlePhoto: pickedPhoto,
-        photoGroup: shuffle(this.state.photoGroup)
+        photoGroup: shuffle(this.state.photoGroup),
+        renderGameOver: false
       };
     });
   };
