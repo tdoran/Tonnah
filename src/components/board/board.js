@@ -14,14 +14,14 @@ import {
 export default class Board extends React.Component {
   state = {
     score: 0,
-    time: 5,
+    time: 10,
     singlePhoto: "",
     photoGroup: "",
     renderSinglePhoto: false,
     renderPhotoGroup: false,
     url: "",
-    clickedPhoto: "abc",
-    renderGameOver: false
+    renderGameOver: false,
+    endScore: 0
   };
 
   timer = () => {
@@ -37,7 +37,9 @@ export default class Board extends React.Component {
           this.setState({
             renderPhotoGroup: false,
             time: 6,
-            renderGameOver: true
+            renderGameOver: true,
+            endScore: this.state.score,
+            score: 0
           });
           clearInterval(countDown);
         }
@@ -99,7 +101,8 @@ export default class Board extends React.Component {
       photoGroup,
       renderSinglePhoto,
       renderPhotoGroup,
-      renderGameOver
+      renderGameOver,
+      endScore
     } = this.state;
 
     return (
@@ -110,7 +113,7 @@ export default class Board extends React.Component {
           <span className="board--instruction--keyword">Find</span> a gif.
         </h2>
         {!renderGameOver && <p className="board--score">score: {score}</p>}
-        {renderGameOver && <Gameover score={score} />}
+        {renderGameOver && <Gameover score={endScore} />}
 
         {!renderSinglePhoto &&
           !renderPhotoGroup && (
