@@ -19,7 +19,6 @@ export default class Board extends React.Component {
     photoGroup: "",
     renderSinglePhoto: false,
     renderPhotoGroup: false,
-    url: "",
     renderGameOver: false,
     endScore: 0
   };
@@ -70,9 +69,10 @@ export default class Board extends React.Component {
     });
   };
 
-  clickHandler = url => {
+  clickHandler = photo => {
+    let url = photo[0];
     return () => {
-      if (url === this.state.singlePhoto) {
+      if (url === this.state.singlePhoto[0]) {
         this.setState(prevState => {
           return {
             score: prevState.score + 1,
@@ -126,10 +126,10 @@ export default class Board extends React.Component {
           <Timer time={time} timer={this.timer} rendered={renderSinglePhoto} />
         )}
 
-        {renderSinglePhoto && <Singlephoto url={singlePhoto} />}
+        {renderSinglePhoto && <Singlephoto titleUrl={singlePhoto} />}
 
         {renderPhotoGroup && (
-          <Photogroup urls={photoGroup} clickHandler={this.clickHandler} />
+          <Photogroup allPhotos={photoGroup} clickHandler={this.clickHandler} />
         )}
       </div>
     );

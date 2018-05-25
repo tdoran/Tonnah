@@ -3,15 +3,16 @@ import "./style.css";
 
 export default class Photogroup extends React.Component {
   render() {
-    const { urls } = this.props;
+    const { allPhotos } = this.props;
     return (
       <div>
-        {urls.map(url => (
+        {allPhotos.map(photo => (
           <img
             className="board--photos"
-            key={urls.indexOf(url)}
-            src={url}
-            onClick={this.props.clickHandler(url)}
+            key={allPhotos.indexOf(photo)}
+            src={photo[0]}
+            alt={photo[1]}
+            onClick={this.props.clickHandler(photo)}
           />
         ))}
       </div>

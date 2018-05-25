@@ -10,18 +10,20 @@ const checkResponse = response => {
 
 // Function to get x photos from API
 export const getData = () => {
-  return fetch(`http://api.giphy.com/v1/stickers/trending?limit=200&api_key=${token}`)
+  return fetch(
+    `http://api.giphy.com/v1/stickers/trending?limit=200&api_key=${token}`
+  )
     .then(checkResponse)
     .catch(err => {
-      console.log(err.message)
-    })
+      console.log(err.message);
+    });
 };
 
 // Function to make array of image urls from api response
 
 export const makeImageArray = obj => {
-  return obj.data.map(gif => gif.images.downsized_medium.url)
-}
+  return obj.data.map(gif => [gif.images.downsized_medium.url, gif.title]);
+};
 
 // Function to select photo from above func for single photo
 export const pickSingle = array => {
@@ -30,15 +32,4 @@ export const pickSingle = array => {
 };
 
 // Function to shuffle gif array
-
-export const shuffle = array => array.sort((a, b) => (0.5 - Math.random()));
-
-
-
-// export const getData = url => {
-//   return fetch(`${url}?access_token=${accessToken}`)
-//     .then(checkResponse)
-//     .catch(err => {
-//       throw new Error(`fetch getUserData failed ${err}`);
-//     });
-// };
+export const shuffle = array => array.sort((a, b) => 0.5 - Math.random());
