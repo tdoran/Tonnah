@@ -8,7 +8,6 @@ function Singlephoto(props) {
       src={props.titleUrl[0]}
       alt={props.titleUrl[1]}
       data-testid="singlephoto"
-      // alt="First image"
     />
   );
 }
