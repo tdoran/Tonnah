@@ -8,6 +8,11 @@ export default class Timer extends React.Component {
   }
 
   render() {
-    return <p className="board--timer"> {this.props.time} </p>;
+    return (
+      <p className="board--timer" data-testid="timer">
+        {" "}
+        {this.props.time}{" "}
+      </p>
+    );
   }
 }

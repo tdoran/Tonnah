@@ -7,6 +7,7 @@ function Singlephoto(props) {
       className="board--singlephoto"
       src={props.titleUrl[0]}
       alt={props.titleUrl[1]}
+      data-testid="singlephoto"
     />
   );
 }

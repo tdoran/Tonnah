@@ -51,10 +51,17 @@ export default class Board extends React.Component {
   };
 
   componentDidMount() {
-    getData().then(data => {
-      let gifArray = makeImageArray(data);
-      this.setState({ photoGroup: gifArray });
-    });
+    getData()
+      .then(
+        data => {
+          let gifArray = makeImageArray(data);
+          this.setState({ photoGroup: gifArray });
+        },
+        err => {
+          console.log("Fetch error: ", err.message);
+        }
+      )
+      .catch(err => console.log(err.message));
   }
 
   beginGame = () => {
