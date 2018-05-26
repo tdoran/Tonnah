@@ -113,7 +113,7 @@ export default class Board extends React.Component {
     } = this.state;
 
     return (
-      <div className="board" data-testid="board">
+      <div className="board">
         <h1 className="board--title">Gif, Set, Match</h1>
         <h2 className="board--instruction">
           <span className="board--instruction--keyword">See</span> a gif.{" "}

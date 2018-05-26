@@ -5,7 +5,7 @@ function Photogroup(props) {
   let i = 0;
   const { allPhotos } = props;
   return (
-    <div data-testid="photogroup">
+    <div>
       {allPhotos.map(photo => (
         <img
           className="board--photos"

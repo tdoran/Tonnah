@@ -1,0 +1,10 @@
+.gameover {
+  border: solid 2px #efecec;
+  border-radius: 0.25rem;
+  margin: 3rem auto;
+  padding: 0.5rem 0rem;
+  background-color: floralwhite;
+  box-shadow: 1px 11px 10px 0 rgba(2, 2, 2, 0.21),
+    1px 6px 12px 0 rgba(2, 2, 2, 0.24);
+  width: 50%;
+}
