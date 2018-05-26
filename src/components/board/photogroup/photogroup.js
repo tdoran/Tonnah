@@ -1,20 +1,22 @@
 import React from "react";
 import "./style.css";
 
-export default class Photogroup extends React.Component {
-  render() {
-    const { urls } = this.props;
-    return (
-      <div>
-        {urls.map(url => (
-          <img
-            className="board--singlephoto"
-            key={urls.indexOf(url)}
-            src={url}
-            onClick={this.props.clickHandler(url)}
-          />
-        ))}
-      </div>
-    );
-  }
+function Photogroup(props) {
+  let i = 0;
+  const { allPhotos } = props;
+  return (
+    <div data-testid="photogroup">
+      {allPhotos.map(photo => (
+        <img
+          className="board--photos"
+          key={i++}
+          src={photo[0]}
+          alt={photo[1]}
+          onClick={props.clickHandler(photo)}
+        />
+      ))}
+    </div>
+  );
 }
+
+export default Photogroup;

@@ -1,14 +1,16 @@
 import React from "react";
 import "./style.css";
 
-export default class Singlephoto extends React.Component {
-  render() {
-    return (
-      <img
-        className="board--singlephoto"
-        alt="First image"
-        src={this.props.url}
-      />
-    );
-  }
+function Singlephoto(props) {
+  return (
+    <img
+      className="board--singlephoto"
+      src={props.titleUrl[0]}
+      alt={props.titleUrl[1]}
+      data-testid="singlephoto"
+      // alt="First image"
+    />
+  );
 }
+
+export default Singlephoto;
