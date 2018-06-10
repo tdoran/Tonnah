@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server/src/index.js | parcel client/public/index.html",
+    "start": "node server/src/index.js",
     "client": "parcel client/public/index.html",
     "server": "node server/src/index.js",
     "test": "jest",
