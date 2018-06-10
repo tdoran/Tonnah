@@ -1,4 +1,4 @@
-import React from "react";
+import React from "React";
 import Timer from "./timer/timer.js";
 import Singlephoto from "./singlephoto/singlephoto.js";
 import Photogroup from "./photogroup/photogroup.js";

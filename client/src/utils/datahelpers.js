@@ -1,5 +1,3 @@
-import { token } from "../../token.js";
-
 const checkResponse = response => {
   if (response.status !== 200) {
     console.log(`Error with the request! ${response.status}`);
@@ -10,10 +8,8 @@ const checkResponse = response => {
 
 // Function to get x photos from API
 export const getData = () => {
-  return fetch(
-    `http://api.giphy.com/v1/stickers/trending?limit=200&api_key=${token}`
-  )
-    .then(checkResponse)
+  return fetch(`http://localhost:3000/getGifs`)
+    .then(res => res.json())
     .catch(err => {
       console.log(err.message);
     });
@@ -22,7 +18,8 @@ export const getData = () => {
 // Function to make array of image urls from api response
 
 export const makeImageArray = obj => {
-  return obj.data.map(gif => [gif.images.downsized_medium.url, gif.title]);
+  const parsed = JSON.parse(obj);
+  return parsed.data.map(gif => [gif.images.downsized_medium.url, gif.title]);
 };
 
 // Function to select photo from above func for single photo
