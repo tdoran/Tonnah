@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("axios");
+const path = require("path");
 
 const host = process.env.HOST || "localhost";
 const port = process.env.PORT || 3000;
@@ -34,12 +35,18 @@ const checkResponse = response => {
   return response;
 };
 
+app.use(express.static("./dist"));
+
+app.get("/", (req, res, next) => {
+  res.sendFile(path.join(__dirname, "../../dist", "index.html"));
+});
+
 // getGifs route
 app.get("/getGifs", (req, res, next) => {
   return request
     .get(`http://api.giphy.com/v1/stickers/trending?limit=126&api_key=${token}`)
     .then(gifResponse => {
-      console.log("Success", gifResponse.data.data);
+      // console.log("Success", gifResponse.data.data);
       res.json(JSON.stringify(gifResponse.data));
     })
     .catch(err => {
