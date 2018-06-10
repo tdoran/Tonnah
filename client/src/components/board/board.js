@@ -123,11 +123,14 @@ export default class Board extends React.Component {
         {renderGameOver && <Gameover score={endScore} />}
 
         {!renderSinglePhoto &&
-          !renderPhotoGroup && (
+          !renderPhotoGroup &&
+          photoGroup && (
             <button className="board--btn" onClick={this.beginGame}>
               {!renderGameOver ? "Go!" : "Play Again"}
             </button>
           )}
+
+        {!photoGroup && <button className="board--btn">Loading</button>}
 
         {(renderSinglePhoto || renderPhotoGroup) && (
           <Timer time={time} timer={this.timer} rendered={renderSinglePhoto} />
