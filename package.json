@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server/src/index.js",
+    "start": "node server/src/index.js | parcel client/public/index.html",
     "client": "parcel client/public/index.html",
+    "server": "node server/src/index.js",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
