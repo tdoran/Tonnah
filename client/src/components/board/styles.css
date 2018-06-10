@@ -25,7 +25,7 @@
 }
 
 .board--btn {
-  height: 2rem;
+  height: auto;
   width: 4rem;
   border-radius: 0.25rem;
   background-color: rgb(143, 241, 30);
