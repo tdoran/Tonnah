@@ -20,7 +20,8 @@ export default class Board extends React.Component {
     renderSinglePhoto: false,
     renderPhotoGroup: false,
     renderGameOver: false,
-    endScore: 0
+    endScore: 0,
+    scores: {}
   };
 
   timer = () => {
@@ -62,6 +63,19 @@ export default class Board extends React.Component {
         }
       )
       .catch(err => console.log(err.message));
+
+    fetch(`http://localhost:3000/getScores`)
+      .then(res => res.json())
+      .then(data => {
+        let scores = data.responseData.Items;
+        console.log("this is data: ", scores);
+        this.setState({ allScores: scores }, () => {
+          console.log("this is this.state.scores: ", this.state.scores);
+        });
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
   }
 
   beginGame = () => {
@@ -109,7 +123,8 @@ export default class Board extends React.Component {
       renderSinglePhoto,
       renderPhotoGroup,
       renderGameOver,
-      endScore
+      endScore,
+      allScores
     } = this.state;
 
     return (
@@ -120,7 +135,7 @@ export default class Board extends React.Component {
           <span className="board--instruction--keyword">Find</span> a gif.
         </h2>
         {!renderGameOver && <p className="board--score">score: {score}</p>}
-        {renderGameOver && <Gameover score={endScore} />}
+        {renderGameOver && <Gameover score={endScore} allScores={allScores} />}
 
         {!renderSinglePhoto &&
           !renderPhotoGroup && (
