@@ -37,7 +37,7 @@ const checkResponse = response => {
 // getGifs route
 app.get("/getGifs", (req, res, next) => {
   return request
-    .get(`http://api.giphy.com/v1/stickers/trending?limit=200&api_key=${token}`)
+    .get(`http://api.giphy.com/v1/stickers/trending?limit=126&api_key=${token}`)
     .then(gifResponse => {
       console.log("Success", gifResponse.data.data);
       res.json(JSON.stringify(gifResponse.data));

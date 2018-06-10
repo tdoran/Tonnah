@@ -114,11 +114,15 @@ export default class Board extends React.Component {
 
     return (
       <div className="board">
-        <h1 className="board--title">Gif, Set, Match</h1>
-        <h2 className="board--instruction">
-          <span className="board--instruction--keyword">See</span> a gif.{" "}
-          <span className="board--instruction--keyword">Find</span> a gif.
-        </h2>
+        {!renderPhotoGroup && (
+          <div>
+            <h1 className="board--title">Gif, Set, Match</h1>
+            <h2 className="board--instruction">
+              <span className="board--instruction--keyword">See</span> a gif.{" "}
+              <span className="board--instruction--keyword">Find</span> a gif.
+            </h2>
+          </div>
+        )}
         {!renderGameOver && <p className="board--score">score: {score}</p>}
         {renderGameOver && <Gameover score={endScore} />}
 
@@ -126,7 +130,7 @@ export default class Board extends React.Component {
           !renderPhotoGroup &&
           photoGroup && (
             <button className="board--btn" onClick={this.beginGame}>
-              {!renderGameOver ? "Go!" : "Play Again"}
+              {!renderGameOver ? "Match That Gif!" : "Play Again"}
             </button>
           )}
 
