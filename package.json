@@ -10,7 +10,8 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
-    "build": "parcel build client/public/index.html"
+    "build": "parcel build client/public/index.html",
+    "heroku-postbuild": "npm run build"
   },
   "keywords": [],
   "author": "",
