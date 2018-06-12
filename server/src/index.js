@@ -14,12 +14,14 @@ app.listen(port, () => {
   console.log(`app is running on http://${host}:${port}`);
 });
 
+app.disable("x-powered-by");
+
 // config middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(function(_, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:1234");
+  // res.header("Access-Control-Allow-Origin", "http://localhost:1234");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
