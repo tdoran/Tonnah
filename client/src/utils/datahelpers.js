@@ -8,7 +8,7 @@ const checkResponse = response => {
 
 // Function to get x photos from API
 export const getData = () => {
-  return fetch(`http://localhost:3000/getGifs`)
+  return fetch(`https://gif-set-match.herokuapp.com/getGifs`)
     .then(res => res.json())
     .catch(err => {
       console.log(err.message);
